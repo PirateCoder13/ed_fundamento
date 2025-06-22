@@ -1,6 +1,4 @@
-# ESTUDO DIRIGIDO - FUNDAMENTOS DE BANCO DE DADOS
-
-**Universidade Tuiuti do Paraná**
+UNIVERSIDADE TUIUTI DO PARANÁ
 *Credenciada por Decreto Presidencial de 07 de julho de 1997*
 
 **FACULDADE:** Faculdade de Ciências Exatas e de Tecnologia – FACET  
@@ -11,7 +9,53 @@
 
 ---
 
-## PROJETO: LOCADORA DE MÁQUINAS - BANCO DE DADOS RELACIONAL
+# EDUARDA HORNING BZUNEK
+# JOÃO GUALBERTO BOISSA NETTO  
+# JOSÉ OTAVIO CHACOROWSKI RAIMUNDO
+
+---
+
+# BANCO DE DADOS RELACIONAL DE UM MINIMUNDO DE UMA LOCADORA DE MÁQUINAS
+
+---
+
+**Trabalho realizado para a matéria Fundamentos de Banco de Dados, da Universidade Tuiuti do Paraná. Este trabalho descreve como foi realizada a implementação de um banco de dados relacional. O objetivo é desenvolver e aplicar as habilidades desenvolvidas na matéria.**
+
+**Professor:** Edivaldo de Araújo Pereira
+
+---
+
+**CURITIBA**  
+**2025**
+
+---
+
+## RESUMO
+
+O projeto proposto é Mini-Mundo de uma Locadora de Máquinas que consiste na modelagem de um banco de dados para uma locadora de máquinas e equipamentos. Onde os clientes podem alugar máquinas para utilizá-las em suas obras. Cada obra pode ter diversas máquinas associadas e pode contar com operadores responsáveis pela operação dos equipamentos. Também há os outros relacionamentos que ocorrem dentro da empresa, como o processo de locação e o registro de funcionários e seus relacionamentos com máquinas e obras.
+
+O banco de dados implementado atende completamente aos requisitos estabelecidos, com 9 tabelas relacionais, mais de 70 registros inseridos e todas as consultas SQL funcionando adequadamente, demonstrando a aplicação prática dos conceitos de modelagem de dados, normalização e linguagem SQL.
+
+---
+
+## SUMÁRIO
+
+1. INTRODUÇÃO
+2. OBJETIVOS  
+3. METODOLOGIA
+4. DESENVOLVIMENTO
+   - PASSO 1: MODELO CONCEITUAL
+   - PASSO 2: MODELO LÓGICO
+   - PASSO 3: INSTANCIAÇÃO DO BANCO DE DADOS
+   - PASSO 4: INSERÇÃO DE DADOS E COMANDOS DML
+   - PASSO 5: CONSULTAS BÁSICAS (SELEÇÃO, PROJEÇÃO, JUNÇÃO)
+   - PASSO 6: CONSULTAS AVANÇADAS (SUBCONSULTAS, FUNÇÕES AGREGADAS, GROUP BY)
+5. RESULTADOS
+6. ESTRUTURA DE ARQUIVOS
+7. INSTRUÇÕES DE EXECUÇÃO
+8. CONSIDERAÇÕES FINAIS
+
+---
 
 ### 1. INTRODUÇÃO
 
@@ -40,7 +84,7 @@ O desenvolvimento seguiu rigorosamente os 6 passos estabelecidos:
 
 ### 4. DESENVOLVIMENTO
 
-#### 4.1 MODELO CONCEITUAL (Passo 1)
+### PASSO 1: MODELO CONCEITUAL
 
 O modelo conceitual foi desenvolvido identificando as principais entidades do domínio:
 
@@ -59,7 +103,7 @@ O modelo conceitual foi desenvolvido identificando as principais entidades do do
 - Obra TEM Consultor (Operador) (N:1)
 - Operador TRABALHA_EM Obra com Máquina (N:M:M)
 
-#### 4.2 MODELO LÓGICO (Passo 2)
+### PASSO 2: MODELO LÓGICO
 
 O modelo lógico resultou em 9 tabelas:
 
@@ -73,11 +117,50 @@ O modelo lógico resultou em 9 tabelas:
 8. **pode_operar** (id_maquina, id_operador) - Relacionamento N:M
 9. **operacao_maquina_obra** (id_obra, id_maquina, id_operador) - Relacionamento ternário
 
-#### 4.3 INSTANCIAÇÃO DO BANCO (Passo 3)
+### PASSO 3: INSTANCIAÇÃO DO BANCO DE DADOS
 
 O banco de dados foi criado utilizando MySQL, com todas as restrições de integridade referencial implementadas através de chaves estrangeiras. O script de criação está disponível em `Passo-3/ed_fundamento.sql`.
 
-#### 4.4 INSERÇÃO DE DADOS (Passo 4)
+**Script de criação das tabelas:**
+
+```sql
+-- Criação do banco de dados
+CREATE DATABASE locadora_maquinas;
+USE locadora_maquinas;
+
+-- Tabela de Clientes
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    contato VARCHAR(100),
+    credito DECIMAL(10,2),
+    pagamento VARCHAR(50)
+);
+
+-- Tabela de Operadores/Colaboradores/Consultores
+CREATE TABLE operadores (
+    id_operador INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    funcao VARCHAR(50),
+    habilitacao VARCHAR(50)
+);
+
+-- Tabela de Obras
+CREATE TABLE obras (
+    id_obra INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50),
+    localizacao VARCHAR(100),
+    id_proprietario INT,
+    id_consultor INT,
+    FOREIGN KEY (id_proprietario) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_consultor) REFERENCES operadores(id_operador)
+);
+
+-- Demais tabelas com relacionamentos...
+```
+
+### PASSO 4: INSERÇÃO DE DADOS E COMANDOS DML
 
 Foram inseridos dados de teste em todas as tabelas, respeitando o mínimo de 5 registros por tabela:
 
@@ -91,7 +174,7 @@ Foram inseridos dados de teste em todas as tabelas, respeitando o mínimo de 5 r
 - **5 comandos UPDATE:** Atualizações de crédito, status, funções, etc.
 - **5 comandos DELETE:** Remoções de relacionamentos e registros
 
-#### 4.5 CONSULTAS BÁSICAS (Passo 5)
+### PASSO 5: CONSULTAS BÁSICAS (SELEÇÃO, PROJEÇÃO, JUNÇÃO)
 
 Implementadas 15 consultas demonstrando as operações relacionais fundamentais:
 
@@ -116,7 +199,7 @@ Implementadas 15 consultas demonstrando as operações relacionais fundamentais:
 - Operadores e suas habilitações
 - Operações completas em obras
 
-#### 4.6 CONSULTAS AVANÇADAS (Passo 6)
+### PASSO 6: CONSULTAS AVANÇADAS (SUBCONSULTAS, FUNÇÕES AGREGADAS, GROUP BY)
 
 Desenvolvidas 15 consultas complexas demonstrando técnicas avançadas:
 
@@ -186,15 +269,24 @@ Para executar o projeto completo:
 4. **Testar consultas avançadas:** Execute `Passo-6/consultas_avancadas.sql`
 5. **Verificação geral:** Execute `teste_completo.sql`
 
-### 8. CONCLUSÃO
+## CONSIDERAÇÕES FINAIS
 
 O projeto foi desenvolvido com sucesso, implementando um banco de dados robusto e funcional para uma locadora de máquinas. Todas as funcionalidades requeridas foram implementadas, demonstrando a aplicação prática dos conceitos de modelagem de dados, normalização e linguagem SQL.
 
-O banco de dados suporta eficientemente as operações de uma locadora real, incluindo controle de clientes, máquinas, operadores, obras e locações, com todas as consultas necessárias para relatórios gerenciais e operacionais.
+O banco de dados desenvolvido foi capaz de representar o mini-mundo de uma locadora de máquinas, atendendo às necessidades de locação, gestão de máquinas, operação em obras e administração de clientes. O sistema suporta eficientemente as operações de uma locadora real, incluindo controle de clientes, máquinas, operadores, obras e locações, com todas as consultas necessárias para relatórios gerenciais e operacionais.
+
+Todos os objetivos estabelecidos no Estudo Dirigido foram alcançados:
+- ✅ Modelagem conceitual e lógica adequada
+- ✅ Implementação de banco normalizado com integridade referencial
+- ✅ Inserção de dados realísticos e comandos DML funcionais
+- ✅ Consultas básicas e avançadas operacionais
+- ✅ Documentação técnica completa
+
+O projeto demonstra domínio dos conceitos fundamentais de banco de dados e capacidade de aplicá-los em cenários práticos do mundo real.
 
 ---
 
 **Data de Entrega:** 24 de junho de 2025  
-**Autor:** [Nome do Aluno]  
+**Autores:** Eduarda Horning Bzunek, João Gualberto Boissa Netto, José Otavio Chacorowski Raimundo  
 **Disciplina:** Fundamentos de Banco de Dados  
 **Professor:** Edivaldo de Araújo Pereira
