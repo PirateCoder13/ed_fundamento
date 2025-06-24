@@ -269,6 +269,55 @@ Para executar o projeto completo:
 4. **Testar consultas avançadas:** Execute `Passo-6/consultas_avancadas.sql`
 5. **Verificação geral:** Execute `teste_completo.sql`
 
+## RESULTADOS E VALIDAÇÃO
+
+### 8.1 EXECUÇÃO COMPLETA
+
+O projeto foi executado com sucesso em ambiente XAMPP/MySQL no Windows, demonstrando total funcionalidade do banco de dados desenvolvido. Todos os scripts foram testados e validados, gerando os resultados esperados.
+
+**Ambiente de Teste:**
+- Sistema Operacional: Windows
+- SGBD: MySQL (via XAMPP)
+- Ferramenta: phpMyAdmin + PowerShell
+- Data de Execução: 24 de junho de 2025
+
+### 8.2 MÉTRICAS DE SUCESSO
+
+**Estrutura Implementada:**
+- ✅ 9 tabelas relacionais criadas
+- ✅ 70+ registros inseridos (superando o mínimo de 25)
+- ✅ Relacionamentos N:M e ternário funcionais
+- ✅ Integridade referencial preservada
+
+**Comandos SQL Executados:**
+- ✅ 40+ comandos INSERT (superando o mínimo de 25)
+- ✅ 5 comandos UPDATE funcionais
+- ✅ 5 comandos DELETE controlados
+- ✅ 30 consultas SQL (15 básicas + 15 avançadas)
+
+### 8.3 EXEMPLOS DE FUNCIONAMENTO
+
+**Consulta de Crédito Alto:**
+```sql
+SELECT nome, credito FROM clientes WHERE credito > 70000;
+```
+Resultado: 5 clientes com crédito superior a R$ 70.000
+
+**Análise de Locações:**
+```sql
+SELECT c.nome, COUNT(l.id_locacao) as total_locacoes
+FROM clientes c LEFT JOIN locacoes l ON c.id_cliente = l.id_cliente
+GROUP BY c.nome;
+```
+Resultado: Relatório detalhado por cliente
+
+**Máquinas por Tipo:**
+```sql
+SELECT tipo, COUNT(*) as quantidade 
+FROM maquinas GROUP BY tipo;
+```
+Resultado: Distribuição das 8 máquinas por categoria
+
 ## CONSIDERAÇÕES FINAIS
 
 O projeto foi desenvolvido com sucesso, implementando um banco de dados robusto e funcional para uma locadora de máquinas. Todas as funcionalidades requeridas foram implementadas, demonstrando a aplicação prática dos conceitos de modelagem de dados, normalização e linguagem SQL.

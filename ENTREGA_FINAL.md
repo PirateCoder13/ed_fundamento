@@ -6,7 +6,7 @@
 ## 📋 ENTREGA FINAL - 24/06/2025
 
 **Universidade Tuiuti do Paraná**  
-**Aluno:** [SEU NOME AQUI]  
+**Alunos:** Eduarda Horning Bzunek, João Gualberto Boissa Netto, José Otavio Chacorowski Raimundo  
 **Disciplina:** Fundamentos de Banco de Dados  
 **Professor:** Edivaldo de Araújo Pereira  
 
@@ -55,19 +55,19 @@
 ### **1. Pré-requisitos:**
 - ✅ XAMPP instalado e rodando
 - ✅ MySQL/MariaDB ativo
-- ✅ Senha: `dudacabeca`
+- ✅ Usuário: `root` (sem senha padrão)
 
-### **2. Execução Automática:**
-```bash
+### **2. Execução Automática (Windows):**
+```powershell
 # Navegar até o diretório
-cd /opt/lampp/htdocs/ed_fundamento
+cd "C:\Users\PirateNote\Desktop\facul\ed_fundamento"
 
-# Executar os scripts na ordem:
-mysql -u root -pdudacabeca -h 127.0.0.1 -P 3306 < Passo-3/ed_fundamento.sql
-mysql -u root -pdudacabeca -h 127.0.0.1 -P 3306 < Passo-4/inserir_dados.sql
-mysql -u root -pdudacabeca -h 127.0.0.1 -P 3306 < Passo-5/consultas_basicas.sql
-mysql -u root -pdudacabeca -h 127.0.0.1 -P 3306 < Passo-6/consultas_avancadas.sql
-mysql -u root -pdudacabeca -h 127.0.0.1 -P 3306 < teste_completo.sql
+# Executar scripts via PowerShell + MySQL do XAMPP
+& "C:\xampp\mysql\bin\mysql.exe" -u root locadora_maquinas -e "$(Get-Content 'Passo-3\ed_fundamento.sql' | Out-String)"
+& "C:\xampp\mysql\bin\mysql.exe" -u root locadora_maquinas -e "$(Get-Content 'Passo-4\inserir_dados.sql' | Out-String)"
+& "C:\xampp\mysql\bin\mysql.exe" -u root locadora_maquinas -e "$(Get-Content 'Passo-5\consultas_basicas.sql' | Out-String)"
+& "C:\xampp\mysql\bin\mysql.exe" -u root locadora_maquinas -e "$(Get-Content 'Passo-6\consultas_avancadas.sql' | Out-String)"
+& "C:\xampp\mysql\bin\mysql.exe" -u root locadora_maquinas -e "$(Get-Content 'teste_completo.sql' | Out-String)"
 ```
 
 ### **3. Acesso Visual:**
@@ -156,6 +156,6 @@ O banco de dados **Locadora de Máquinas** foi desenvolvido seguindo rigorosamen
 
 ---
 
-**Data:** 22 de junho de 2025  
-**Ambiente testado:** XAMPP/MySQL  
+**Data:** 24 de junho de 2025  
+**Ambiente testado:** XAMPP/MySQL (Windows)  
 **Status:** ✅ **APROVADO PARA ENTREGA**

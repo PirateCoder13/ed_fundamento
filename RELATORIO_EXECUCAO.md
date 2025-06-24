@@ -2,8 +2,8 @@
 
 ## ✅ PROJETO EXECUTADO COM SUCESSO!
 
-**Data de Execução:** 22 de junho de 2025  
-**Ambiente:** XAMPP (MySQL/MariaDB)  
+**Data de Execução:** 24 de junho de 2025  
+**Ambiente:** XAMPP (MySQL/MariaDB) - Windows  
 **Status:** Todos os passos executados com sucesso  
 
 ---
